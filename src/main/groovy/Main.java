@@ -15,12 +15,10 @@ import java.util.Arrays;
 import java.util.List;
 
 
-
-
 public class Main {
-    private static int upvotes;
 
-    public static void main(String ... args) throws IOException {
+
+    public static void main(String... args) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create()
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setConnectTimeout(5000)    // максимальное время ожидание подключения к серверу
@@ -37,15 +35,16 @@ public class Main {
         readAnswer(body);
     }
 
-        static void readAnswer(String body) throws JsonProcessingException {
-            ObjectMapper mapper = new ObjectMapper();
+    static void readAnswer(String body) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
 
-            List<Cat> cats = mapper.readValue(body, new TypeReference<>(){});
-                    cats.stream()
-                    .filter(ri -> ri.getUpvotes()!=0)
-                    .forEach(System.out::println);
+        List<Cat> cats = mapper.readValue(body, new TypeReference<>() {
+        });
+        cats.stream()
+                .filter(ri -> ri.getUpvotes() != 0)
+                .forEach(System.out::println);
 
-            }
+    }
 
 
 }
